@@ -21,6 +21,11 @@ const createUser = async (req, res) => {
 const getUsers = async (_req, res) => {
   try {
     const users = await User.find();
+    console.log(
+      "users:",
+      users.filter((user) => user.name)
+    );
+    io.getIO().emit("all_users", users);
     return res.json({ users: users });
   } catch (error) {
     console.error(error);
