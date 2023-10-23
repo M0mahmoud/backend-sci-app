@@ -1,17 +1,19 @@
-import { io } from "../index.js";
-import User from "../models/User.js";
-import {} from "socket.io";
+const User = require("../models/User");
+const io = require('../socket')
 
 // ####  ----Request Data
 // {
 //   "name": "Name From Form app",
 // }
-export const createUser = async (req, res) => {
+const createUser = async (req, res) => {
   const { name } = req.body;
   try {
     const newUser = new User({ name });
     await newUser.save();
-    io.emit("user", newUser);
+    io.getIO().emit("posts", {
+      action: "create",
+      newUser
+    });
     return res.json({ user: newUser });
   } catch (error) {
     console.error(error);
@@ -19,7 +21,7 @@ export const createUser = async (req, res) => {
   }
 };
 
-export const getUsers = async (_req, res) => {
+const getUsers = async (_req, res) => {
   try {
     const users = await User.find();
     return res.json({ users: users });
@@ -27,6 +29,10 @@ export const getUsers = async (_req, res) => {
     console.error(error);
     res.status(500).json({ error: "Failed to retrieve users." });
   }
+};
+module.exports = {
+  getUsers,
+  createUser,
 };
 //  ###------------Response
 // {

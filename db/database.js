@@ -1,6 +1,6 @@
-import { connect } from "mongoose";
+const { connect } = require("mongoose");
 
-export async function connectDB() {
+async function connectDB() {
   try {
     await connect(process.env.DATABASE_URL, {
       // useNewUrlParser: true,
@@ -11,3 +11,4 @@ export async function connectDB() {
     console.error("MongoDB Error", error);
   }
 }
+module.exports = connectDB;
