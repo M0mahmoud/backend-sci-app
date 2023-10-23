@@ -1,5 +1,5 @@
 const User = require("../models/User");
-const io = require('../socket')
+const io = require("../socket");
 
 // ####  ----Request Data
 // {
@@ -10,10 +10,7 @@ const createUser = async (req, res) => {
   try {
     const newUser = new User({ name });
     await newUser.save();
-    io.getIO().emit("posts", {
-      action: "create",
-      newUser
-    });
+    io.getIO().emit("user_name", [newUser.name]); // ['new_name']
     return res.json({ user: newUser });
   } catch (error) {
     console.error(error);

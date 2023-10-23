@@ -2,7 +2,6 @@ const { config } = require("dotenv");
 const express = require("express");
 const connectDB = require("./db/database");
 const userRoute = require("./routes/userRoute");
-const { Server } = require("socket.io");
 
 config();
 const app = express();
@@ -40,7 +39,7 @@ app.use("/user", userRoute);
 connectDB()
   .then(() => {
     const io = require("./socket");
-    const httpServer = app.listen(3000);
+    const httpServer = app.listen(port);
     io.init(httpServer);
 
     const socketIO = io.getIO();
