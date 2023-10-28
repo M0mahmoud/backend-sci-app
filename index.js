@@ -1,11 +1,13 @@
-const { config } = require("dotenv");
-const express = require("express");
-const connectDB = require("./db/database");
-const userRoute = require("./routes/userRoute");
+import { config } from "dotenv";
+import express, { json } from "express";
+
+import connectDB from "./db/database.js";
+import authRoute from "./routes/auth.js";
+import userRoute from "./routes/userRoute.js";
 
 config();
 const app = express();
-app.use(express.json());
+app.use(json());
 const port = process.env.PORT || 3000;
 
 app.use((_req, res, next) => {
@@ -18,36 +20,17 @@ app.use((_req, res, next) => {
   next();
 });
 
+app.use("/auth", authRoute);
 app.use("/user", userRoute);
 
-// connectDB()
-//   .then(() => {
-//     app.listen(port, () => {
-//       console.log(`listening: ${port}`);
-//     });
-//   })
-//   .catch((err) => console.log(err));
-
-// export const io = new Server(app.listen(port), {
-//   cors: {
-//     origin: "*",
-//     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
-//     allowedHeaders: ["Content-Type", "Authorization"],
-//   },
-// });
+app.use("*", (_req, res) => {
+  res.json({ msg: "Server running..." });
+});
 
 connectDB()
   .then(() => {
-    const io = require("./socket");
-    const httpServer = app.listen(port);
-    io.init(httpServer);
-
-    const socketIO = io.getIO();
-
-    socketIO.on("connection", () => {
-      console.log("Connected to server!");
-      // You can now attach other event listeners to 'socket' here
+    app.listen(port, () => {
+      console.log(`listening: ${port}`);
     });
   })
-
   .catch((err) => console.log(err));
