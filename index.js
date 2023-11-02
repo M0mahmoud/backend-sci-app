@@ -21,11 +21,11 @@ app.use((_req, res, next) => {
 });
 
 app.use("/auth", authRoute);
-app.use("/user", userRoute);
+app.use("/admin", userRoute);
 
-app.use("*", (_req, res) => {
-  res.json({ msg: "Server running..." });
-});
+// app.use("*", (_req, res) => {
+//   res.json({ msg: "Server running..." });
+// });
 
 connectDB()
   .then(() => {

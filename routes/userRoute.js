@@ -1,8 +1,12 @@
 import { Router } from "express";
 
-import { getUser } from "../controller/userController.js";
+import { adminGetUsers, deleteUser } from "../controller/userController.js";
+import isAuthenticated from "../middleware/isAuth.js";
 
 const router = Router();
-router.route("/").post(getUser);
+router
+  .route("/users")
+  .get(isAuthenticated, adminGetUsers)
+  .delete(isAuthenticated, deleteUser);
 
 export default router;

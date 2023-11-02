@@ -81,6 +81,7 @@ async function signIn(req, res, next) {
         userId: String(userExist._id),
         name: userExist.name,
         email: userExist.email,
+        isAdmin: userExist.isAdmin,
       },
     });
   } catch (err) {
