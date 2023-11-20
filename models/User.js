@@ -19,6 +19,12 @@ const UserSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    plants: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Plant",
+      },
+    ],
   },
   { timestamps: true }
 );

@@ -1,3 +1,4 @@
+import { Model } from "mongoose";
 import User from "../models/User.js";
 import HttpStatus from "../utils/HttpStatus.js";
 
@@ -53,5 +54,15 @@ export const deleteUser = async (req, res, next) => {
       err.statusCode = 500;
     }
     next(err);
+  }
+};
+
+export const getOneUser = async (req, res) => {
+  const { userId } = req.body;
+  try {
+    const user = await User.findById(userId);
+    return res.json({ user });
+  } catch (error) {
+    console.log("error:", error);
   }
 };

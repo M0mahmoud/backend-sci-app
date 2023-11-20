@@ -1,6 +1,10 @@
 import { Router } from "express";
 
-import { adminGetUsers, deleteUser } from "../controller/userController.js";
+import {
+  adminGetUsers,
+  deleteUser,
+  getOneUser,
+} from "../controller/userController.js";
 import isAuthenticated from "../middleware/isAuth.js";
 
 const router = Router();
@@ -9,4 +13,5 @@ router
   .get(isAuthenticated, adminGetUsers)
   .delete(isAuthenticated, deleteUser);
 
+router.get("/user", getOneUser);
 export default router;

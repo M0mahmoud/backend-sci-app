@@ -3,6 +3,7 @@ import express, { json } from "express";
 
 import connectDB from "./db/database.js";
 import authRoute from "./routes/auth.js";
+import plantRoute from "./routes/plant.js";
 import userRoute from "./routes/userRoute.js";
 
 config();
@@ -22,6 +23,7 @@ app.use((_req, res, next) => {
 
 app.use("/auth", authRoute);
 app.use("/admin", userRoute);
+app.use("/plant", plantRoute);
 
 // app.use("*", (_req, res) => {
 //   res.json({ msg: "Server running..." });
