@@ -15,7 +15,10 @@ router
   .get(isAuthenticated, adminGetUsers)
   .delete(isAuthenticated, deleteUser);
 
-router.route("/treatment").patch(editPlantTreatment).get(getPlantTreatment);
+router
+  .route("/treatment")
+  .patch(isAuthenticated, editPlantTreatment)
+  .get(getPlantTreatment);
 
 router.get("/user", getOneUser);
 export default router;

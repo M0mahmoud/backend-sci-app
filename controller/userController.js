@@ -7,7 +7,6 @@ export const adminGetUsers = async (req, res, next) => {
 
   try {
     const user = await User.findById(id);
-    console.log("user:", user);
     if (!user) {
       const error = new Error(`Could not find User!`);
       error.statusCode = 404;
@@ -23,9 +22,11 @@ export const adminGetUsers = async (req, res, next) => {
       });
     }
 
+    const response = allUsers.filter((us) => us.email !== user.email);
+
     return res.json({
       status: HttpStatus.SUCCESS,
-      users: allUsers,
+      users: response,
     });
   } catch (err) {
     if (!err.statusCode) {
