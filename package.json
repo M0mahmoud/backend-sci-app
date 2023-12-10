@@ -8,8 +8,8 @@
     "node": ">=14.20.1"
   },
   "scripts": {
-    "start": "node --watch index.js",
-    "dev": "nodemon --watch index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

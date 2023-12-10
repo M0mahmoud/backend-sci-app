@@ -1,18 +1,22 @@
 import Plant from "../models/Plant.js";
+import Treatment from "../models/Treatment.js";
 import User from "../models/User.js";
 import HttpStatus from "../utils/HttpStatus.js";
 
 export const uploadNewPLant = async (req, res, next) => {
-  const { plantName, plantDisease, image, hasDisease, userId } = req.body;
+  const { plantName, plantDisease, image, hasDisease, userId, plantId } =
+    req.body;
   // TODO Validation
   try {
     const user = await User.findById(userId);
-    console.log("user:", user);
+
     if (!user) {
       const error = new Error(`Could not find User!`);
       error.statusCode = 404;
       throw error;
     }
+
+    const existingTreatment = await Treatment.findOne({ plantId });
 
     const newPlant = new Plant({
       plantName,
@@ -20,6 +24,10 @@ export const uploadNewPLant = async (req, res, next) => {
       plantDisease,
       image,
     });
+
+    if (hasDisease) {
+      newPlant.treatment = existingTreatment.treatment;
+    }
     const savedPlant = await newPlant.save();
 
     user.plants.push(savedPlant._id);

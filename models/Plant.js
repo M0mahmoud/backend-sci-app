@@ -18,6 +18,9 @@ const PlantSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    treatment: {
+      type: String,
+    },
   },
   { timestamps: true }
 );

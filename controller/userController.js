@@ -62,6 +62,11 @@ export const getOneUser = async (req, res) => {
   const { userId } = req.body;
   try {
     const user = await User.findById(userId);
+    if (!user) {
+      const error = new Error(`Could not find User!`);
+      error.statusCode = 404;
+      throw error;
+    }
     return res.json({ user });
   } catch (error) {
     console.log("error:", error);
@@ -102,6 +107,13 @@ export const getPlantTreatment = async (req, res, next) => {
 export const editPlantTreatment = async (req, res, next) => {
   // TODO: User Validation
   const { userId, plantId, plantDisease, treatment } = req.body;
+  console.log(
+    "userId, plantId, plantDisease, treatment:",
+    userId,
+    plantId,
+    plantDisease,
+    treatment
+  );
 
   try {
     const user = await User.findById(userId);
