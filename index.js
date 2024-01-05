@@ -25,9 +25,9 @@ app.use("/auth", authRoute);
 app.use("/admin", userRoute);
 app.use("/plant", plantRoute);
 
-// app.use("*", (_req, res) => {
-//   res.json({ msg: "Server running..." });
-// });
+app.use("*", (_req, res) => {
+  res.json({ msg: "Server running..." });
+});
 
 connectDB()
   .then(() => {
