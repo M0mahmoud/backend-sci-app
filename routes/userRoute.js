@@ -1,13 +1,13 @@
-import { Router } from "express";
+const { Router } = require("express");
 
-import {
+const {
   adminGetUsers,
   deleteUser,
   editPlantTreatment,
   getOneUser,
   getPlantTreatment,
-} from "../controller/userController.js";
-import isAuthenticated from "../middleware/isAuth.js";
+} = require("../controller/userController");
+const isAuthenticated = require("../middleware/isAuth");
 
 const router = Router();
 router
@@ -21,4 +21,4 @@ router
   .get(getPlantTreatment);
 
 router.get("/user", getOneUser);
-export default router;
+module.exports = router;

@@ -1,9 +1,9 @@
-import bcrypt from "bcryptjs";
-import { validationResult } from "express-validator";
-import Jwt from "jsonwebtoken";
+const bcrypt = require("bcryptjs");
+const { validationResult } = require("express-validator");
+const Jwt = require("jsonwebtoken");
 
-import User from "../models/User.js";
-import HttpStatus from "../utils/HttpStatus.js";
+const User = require("../models/User");
+const HttpStatus = require("../utils/HttpStatus");
 
 async function signUp(req, res, next) {
   const { name, email, password } = req.body;
@@ -92,4 +92,4 @@ async function signIn(req, res, next) {
   }
 }
 
-export { signIn, signUp };
+module.exports = { signIn, signUp };

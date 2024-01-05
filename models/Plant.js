@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose";
+const { Schema, model } = require("mongoose");
 
 const PlantSchema = new Schema(
   {
@@ -26,4 +26,4 @@ const PlantSchema = new Schema(
 );
 
 const Plant = model("Plant", PlantSchema);
-export default Plant;
+module.exports = Plant;

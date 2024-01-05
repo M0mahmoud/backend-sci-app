@@ -1,14 +1,14 @@
-import { config } from "dotenv";
-import express, { json } from "express";
+const { config } = require("dotenv");
+const express = require("express");
 
-import connectDB from "./db/database.js";
-import authRoute from "./routes/auth.js";
-import plantRoute from "./routes/plant.js";
-import userRoute from "./routes/userRoute.js";
+const connectDB = require("./db/database.js");
+const authRoute = require("./routes/auth.js");
+const plantRoute = require("./routes/plant.js");
+const userRoute = require("./routes/userRoute.js");
 
 config();
 const app = express();
-app.use(json());
+app.use(express.json());
 const port = process.env.PORT || 3000;
 
 app.use((_req, res, next) => {

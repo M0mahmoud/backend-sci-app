@@ -1,8 +1,8 @@
-import Treatment from "../models/Treatment.js";
-import User from "../models/User.js";
-import HttpStatus from "../utils/HttpStatus.js";
+const Treatment = require("../models/Treatment");
+const User = require("../models/User");
+const HttpStatus = require("../utils/HttpStatus");
 
-export const adminGetUsers = async (req, res, next) => {
+const adminGetUsers = async (req, res, next) => {
   const { id } = req.body;
 
   try {
@@ -36,7 +36,7 @@ export const adminGetUsers = async (req, res, next) => {
   }
 };
 
-export const deleteUser = async (req, res, next) => {
+const deleteUser = async (req, res, next) => {
   const { idOfUserWillDel } = req.body;
 
   try {
@@ -58,7 +58,7 @@ export const deleteUser = async (req, res, next) => {
   }
 };
 
-export const getOneUser = async (req, res) => {
+const getOneUser = async (req, res) => {
   const { userId } = req.body;
   try {
     const user = await User.findById(userId);
@@ -73,7 +73,7 @@ export const getOneUser = async (req, res) => {
   }
 };
 
-export const getPlantTreatment = async (req, res, next) => {
+const getPlantTreatment = async (req, res, next) => {
   // TODO: User Validation
   const { userId, plantId } = req.body;
 
@@ -104,7 +104,7 @@ export const getPlantTreatment = async (req, res, next) => {
     next(err);
   }
 };
-export const editPlantTreatment = async (req, res, next) => {
+const editPlantTreatment = async (req, res, next) => {
   // TODO: User Validation
   const { userId, plantId, plantDisease, treatment } = req.body;
   console.log(
@@ -152,4 +152,12 @@ export const editPlantTreatment = async (req, res, next) => {
     }
     next(err);
   }
+};
+
+module.exports = {
+  adminGetUsers,
+  deleteUser,
+  getOneUser,
+  getPlantTreatment,
+  editPlantTreatment,
 };

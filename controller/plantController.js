@@ -1,9 +1,8 @@
-import Plant from "../models/Plant.js";
-import Treatment from "../models/Treatment.js";
-import User from "../models/User.js";
-import HttpStatus from "../utils/HttpStatus.js";
+const Treatment = require("../models/Treatment");
+const User = require("../models/User");
+const HttpStatus = require("../utils/HttpStatus");
 
-export const uploadNewPLant = async (req, res, next) => {
+const uploadNewPLant = async (req, res, next) => {
   const { plantName, plantDisease, image, hasDisease, userId, plantId } =
     req.body;
   // TODO Validation
@@ -46,7 +45,7 @@ export const uploadNewPLant = async (req, res, next) => {
   }
 };
 
-export const recentPLants = async (req, res, next) => {
+const recentPLants = async (req, res, next) => {
   const { userId } = req.body;
 
   try {
@@ -62,4 +61,8 @@ export const recentPLants = async (req, res, next) => {
     }
     next(err);
   }
+};
+module.exports = {
+  uploadNewPLant,
+  recentPLants,
 };

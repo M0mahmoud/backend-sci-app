@@ -1,9 +1,12 @@
-import { Router } from "express";
+const { Router } = require("express");
 
-import { recentPLants, uploadNewPLant } from "../controller/plantController.js";
+const {
+  recentPLants,
+  uploadNewPLant,
+} = require("../controller/plantController");
 
 const router = Router();
 router.post("/upload", uploadNewPLant);
 router.get("/recent", recentPLants);
 
-export default router;
+module.exports = router;
