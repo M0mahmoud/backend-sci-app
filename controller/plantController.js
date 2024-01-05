@@ -1,5 +1,6 @@
 const Treatment = require("../models/Treatment");
 const User = require("../models/User");
+const Plant = require("../models/Plant");
 const HttpStatus = require("../utils/HttpStatus");
 
 const uploadNewPLant = async (req, res, next) => {
